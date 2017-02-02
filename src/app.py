@@ -38,4 +38,4 @@ if __name__ == '__main__':
     # It won't run if we import it elsewhere
     from src.db import db  # import db here to prevent circular import
     db.init_app(app)
-    app.run(port=5000, debug=True)
+    app.run(debug=True)
