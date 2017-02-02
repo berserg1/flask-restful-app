@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -10,7 +12,8 @@ from src.security import authenticate, identity
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///appdata.db'
+# Second parameter for get is a default value (for using sqlite locally)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///appdata.db')
 # Turn off flask-sqlalchemy modification tracker
 # sqlalchemy mod tracker will work instead, which is faster
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
