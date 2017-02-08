@@ -1,4 +1,4 @@
-# This file will be used for running the app on Heroku
+# This file will be used for running the app on Heroku or Digital Ocean
 
 from src.app import app
 from src.db import db

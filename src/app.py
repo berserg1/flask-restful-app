@@ -14,23 +14,24 @@ from src.security import authenticate, identity
 app = Flask(__name__)
 # Second parameter for get is a default value (for using sqlite locally)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///appdata.db')
+
 # Turn off flask-sqlalchemy modification tracker
-# sqlalchemy mod tracker will work instead, which is faster
+# sqlalchemy tracker will work instead, which is faster
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = 'test'  # in production, we will use a secure key.
+app.secret_key = 'test'  # TODO Create config file for dev and prod instances, store key there
 api = Api(app)
 
 
 # Uncomment this for local testing
-# @app.before_first_request
-# def create_tables():
-#     db.create_all()  # Creates DB with required tables (don't forget to import corresponding Resources)
+@app.before_first_request
+def create_tables():
+    db.create_all()  # Creates DB with required tables (don't forget to import corresponding Resources)
 
-# Initialize JWT object with our app and authentication and identity handlers
+# Initialize JWT object with the app and authentication and identity handlers
 jwt = JWT(app, authenticate, identity)  # creates a new endpoint /auth
 
 
-# Add resources to our api and provide routes
+# Add resources to the api and create endpoints
 api.add_resource(Store, '/store/<string:name>')
 api.add_resource(StoreList, '/stores')
 api.add_resource(Item, '/item/<string:name>')

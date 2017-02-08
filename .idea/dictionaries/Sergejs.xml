@@ -2,6 +2,7 @@
   <dictionary name="Sergejs">
     <words>
       <w>sqlalchemy</w>
+      <w>sqlite</w>
       <w>tablename</w>
     </words>
   </dictionary>

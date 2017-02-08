@@ -1,5 +1,3 @@
-import sqlite3
-
 from flask_restful import Resource, reqparse
 
 from src.models.user import UserModel
@@ -17,7 +15,8 @@ class UserRegister(Resource):
                         required=True,
                         help="This field cannot be left blank")
 
-    def post(self):
+    @staticmethod
+    def post():
         data = UserRegister.parser.parse_args()
 
         if UserModel.find_by_username(data['username']):

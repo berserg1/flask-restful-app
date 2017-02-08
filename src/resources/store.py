@@ -3,13 +3,15 @@ from src.models.store import StoreModel
 
 
 class Store(Resource):
-    def get(self, name):
+    @staticmethod
+    def get(name):
         store = StoreModel.find_by_name(name)
         if store:
             return store.json()
         return {'message': 'Store not found'}, 404
 
-    def post(self, name):
+    @staticmethod
+    def post(name):
         if StoreModel.find_by_name(name):
             return {'message': "Store with name '{}' already exists".format(name)}, 400
 
@@ -21,7 +23,8 @@ class Store(Resource):
 
         return store.json(), 201
 
-    def delete(self, name):
+    @staticmethod
+    def delete(name):
         store = StoreModel.find_by_name(name)
         if store:
             store.delete_from_db()
@@ -30,6 +33,7 @@ class Store(Resource):
 
 
 class StoreList(Resource):
-    def get(self):
+    @staticmethod
+    def get():
         return {'stores': [store.json() for store in StoreModel.query.all()]}
 

@@ -2,8 +2,8 @@ from src.db import db
 
 
 class UserModel(db.Model):
-    # We inherited Model class from db which is SQLAlchemy object
-    # That will allows us create object-relational mapping
+    # Object-relational mapping is created thanks to inheritance
+    # from the Model base class class of SQLAlchemy object.
     __tablename__ = 'users'  # map this model to 'users' table
 
     # Map model fields to DB columns
