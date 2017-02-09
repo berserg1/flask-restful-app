@@ -23,9 +23,9 @@ api = Api(app)
 
 
 # Uncomment this for local testing
-@app.before_first_request
-def create_tables():
-    db.create_all()  # Creates DB with required tables (don't forget to import corresponding Resources)
+# @app.before_first_request
+# def create_tables():
+#     db.create_all()  # Creates DB with required tables (don't forget to import corresponding Resources)
 
 # Initialize JWT object with the app and authentication and identity handlers
 jwt = JWT(app, authenticate, identity)  # creates a new endpoint /auth
